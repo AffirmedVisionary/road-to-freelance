@@ -4,10 +4,10 @@ A companion repository to my third #100DaysOfCode challenge
 
 ## Objectives:
 
-- [ ] Use GitHub Project on this repo to plan out a online diary.
-- [ ] Create a diary for the challenge.
-- [ ] Create a list of resources for freelance web development as I go.
-- [ ] Create an ongoing project wishlist.
+- [ ] Use GitHub Project on this repo to plan out an online diary.
+- [ ] Create a diary for the challenge which other challenge goers can use in the future.
+- [ ] Collect a list of resources for freelance web development as I go.
+- [ ] Create an ongoing future project wishlist.
 
 ## Desirables:
 
@@ -16,4 +16,4 @@ A companion repository to my third #100DaysOfCode challenge
 - [ ] Screen record one process and host the video somewhere.
 - [ ] Set up my personal slack to recieve project updates.
 
-To find out more about me visit https://affirmedvisionary,com and you are welcome to watch and hold me accountable.
+To find out more about me visit https://affirmedvisionary.com and you are welcome to watch and hold me accountable.
