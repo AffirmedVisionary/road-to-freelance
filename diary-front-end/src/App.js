@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Header from "./components/Header";
+import Register from "./pages/Register";
+import Login from "./pages/LogIn";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Coming Soon
-        </p>
-        <a
-          className="App-link"
-          href="https://affirmedvisionary.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Visit me!
-        </a>
-      </header>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/register" component={Register} exact />
+          <Route path="/login" component={Login} exact />
+        </Switch>
+      </Router>
     </div>
   );
 }
