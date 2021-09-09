@@ -19,14 +19,14 @@ const Header = ({ history }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <Link to="/">
           <NavbarBrand
             style={{ cursor: "pointer" }}
             className="font-weight-bold"
           >
-            LOGO HERE
-          </NavbarBrand>
+        <Link to="/">
+            <img src="../../logo.jpg" alt="logo" width="100px"/>
         </Link>
+          </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
@@ -40,6 +40,11 @@ const Header = ({ history }) => {
                 <NavItem>
                   <Link to="/login">
                     <NavLink style={{ cursor: "pointer" }}>Login</NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/contact">
+                    <NavLink style={{ cursor: "pointer" }}>Contact Us</NavLink>
                   </Link>
                 </NavItem>
               </React.Fragment>

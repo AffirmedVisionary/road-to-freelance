@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const userRoutes = require("./routes/userRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
 //app
 const app = express();
@@ -38,6 +39,7 @@ if (process.env.NODE_ENV == "development") {
 app.use("/api", blogRoutes);
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", contactRoutes);
 
 //port
 const port = process.env.PORT || 8000;

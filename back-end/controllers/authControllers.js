@@ -12,9 +12,9 @@ exports.register = (req, res) => {
       });
     }
 
-    const { name, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
-    let newUser = new User({ name, email, password });
+    let newUser = new User({ firstName, lastName, email, password });
     newUser.save((err, success) => {
       if (err) {
         return res.status(400).json({

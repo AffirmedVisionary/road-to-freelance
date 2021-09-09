@@ -28,9 +28,10 @@ const RegisterComponent = ({ history }) => {
 
     try {
       register(user).then((data) => {
+        console.log("data" + data)
         try {
-          if (data.error) {
-            setValues({ ...values, error: data.error, loading: false });
+          if (data.err) {
+            setValues({ ...values, error: data.err, loading: false });
             console.log("server error");
           } else {
             setValues({
@@ -39,14 +40,15 @@ const RegisterComponent = ({ history }) => {
               lastName: "",
               email: "",
               password: "",
-              error: "",
+              error: false,
               loading: false,
               message: data.message,
               showForm: false,
             });
+            // history.push("/thank-you");
           }
-        } catch (err) {
-          console.log(err);
+        } catch (error) {
+          console.log(error);
         }
       });
     } catch (error) {
@@ -59,9 +61,9 @@ const RegisterComponent = ({ history }) => {
   };
 
   const showLoading = () =>
-    loading ? <div className="alert alert-info">Loading...</div> : "";
-  const showError = () =>
-    error ? <div className="alert alert-danger">{error}</div> : "";
+    loading ? <div className="alert alert-info">Loading...</div> : "Completed";
+  // const showError = () =>
+  //   error ? <div className="alert alert-danger">{error}</div> : "";
   const showMessage = () =>
     message ? <div className="alert alert-info">{message}</div> : "";
 
@@ -115,7 +117,7 @@ const RegisterComponent = ({ history }) => {
   return (
     <div className="container">
       {showLoading()}
-      {showError()}
+      {/* {showError()} */}
       {showMessage()}
       {showForm && registerForm()}
     </div>

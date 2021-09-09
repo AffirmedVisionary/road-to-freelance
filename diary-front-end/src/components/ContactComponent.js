@@ -1,45 +1,35 @@
-import { login, authenticate, isAuth } from "../actions/authActions";
-import React, { useState, useEffect } from "react";
+import { contactUs } from "../actions/contactActions";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
-const LoginComponent = ({ history }) => {
+const ContactComponent = ({ history }) => {
   const [values, setValues] = useState({
+    name: "",
+    comapny: "",
     email: "",
-    password: "",
+    phoneNumber: "",
+    content: "",
     error: "",
     loading: false,
     message: "",
     showForm: true,
   });
 
-  const { email, password, error, loading, message, showForm } = values;
-
-  useEffect(() => {
-    isAuth() && history.push("/");
-  });
+  const { name, company, email, phoneNumber, content, error, loading, message, showForm } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.table({ name, email, password, error, loading, message, showForm });
+    //console.table({ name, company, email, phoneNumber, content, error, loading, message, showForm });
 
     setValues({ ...values, loading: true, error: false });
-    const user = { email, password };
+    const emailMessage = { name, company, email, phoneNumber, content };
 
-    login(user).then((data) => {
+    contactUs(emailMessage).then((data) => {
       try {
         if (data.error) {
           setValues({ ...values, error: data.error, loading: false });
         } else {
-          //save user token to cookie
-          //save user info to localStroage
-          //authenticate user
-          authenticate(data, () => {
-            if (isAuth() && isAuth().role === 1) {
-              history.push("/admin");
-            } else {
-              history.push("/user");
-            }
-          });
+          history.push("/send");
         }
       } catch (err) {
         console.log(err);
@@ -58,11 +48,27 @@ const LoginComponent = ({ history }) => {
   const showMessage = () =>
     message ? <div className="alert alert-info">{message}</div> : "";
 
-  const loginForm = () => {
+  const contactForm = () => {
     return (
       <>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
+            <input
+              value={name}
+              onChange={handleChange("name")}
+              type="text"
+              className="form-control"
+              placeholder="Type your name"
+            />
+            <br />
+            <input
+              value={company}
+              onChange={handleChange("company")}
+              type="text"
+              className="form-control"
+              placeholder="Type your company"
+            />
+            <br />
             <input
               value={email}
               onChange={handleChange("email")}
@@ -71,13 +77,20 @@ const LoginComponent = ({ history }) => {
               placeholder="Type your email"
             />
             <br />
-
             <input
-              value={password}
-              onChange={handleChange("password")}
-              type="password"
+              value={phoneNumber}
+              onChange={handleChange("phoneNumber")}
+              type="text"
               className="form-control"
-              placeholder="Type your password"
+              placeholder="Type your phoneNumber"
+            />
+            <br />
+            <input
+              value={content}
+              onChange={handleChange("content")}
+              type="text"
+              className="form-control"
+              placeholder="Type your content"
             />
           </div>
           <button className="btn btn-primary">login</button>
@@ -91,9 +104,9 @@ const LoginComponent = ({ history }) => {
       {showLoading()}
       {showError()}
       {showMessage()}
-      {showForm && loginForm()}
+      {showForm && contactForm()}
     </div>
   );
 };
 
-export default withRouter(LoginComponent);
+export default withRouter(ContactComponent);
