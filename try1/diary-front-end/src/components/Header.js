@@ -5,7 +5,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -19,14 +18,9 @@ const Header = ({ history }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-          <NavbarBrand
-            style={{ cursor: "pointer" }}
-            className="font-weight-bold"
-          >
-        <Link to="/">
-            <img src="../../logo.jpg" alt="logo" width="100px"/>
+        <Link to="/" style={{ cursor: "pointer" }}>
+            HOME
         </Link>
-          </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>

@@ -2,8 +2,8 @@ import fetch from "isomorphic-fetch";
 import { API } from "../config/config";
 import cookie from "js-cookie";
 
-export async function register(user) {
-  await fetch(`${API}/register`, {
+export const register = (user) => {
+  fetch(`${API}/register`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -19,8 +19,8 @@ export async function register(user) {
     });
 };
 
-export async function login (user) {
-  await fetch(`http://localhost:8000/api/login`, {
+export const login = (user) => {
+  fetch(`http://localhost:8000/api/login`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -36,12 +36,12 @@ export async function login (user) {
     });
 };
 
-export async function logout (next) {
+export const logout = (next) => {
   removeCookie("token");
   removeLocalStorage("user");
   next();
 
-  await fetch(`http://localhost:8000/api/logout`, {
+  fetch(`http://localhost:8000/api/logout`, {
     method: "GET",
   })
     .then((response) => {

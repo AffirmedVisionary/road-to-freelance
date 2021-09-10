@@ -1,3 +1,5 @@
+const nodemailer = require('nodemailer')
+
 exports.email = (req, res) => {
   const output = `
     <p>You have a new contact request</p>
