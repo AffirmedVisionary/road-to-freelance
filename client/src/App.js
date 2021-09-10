@@ -4,7 +4,6 @@ import "./App.css";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import MembersHome from "./pages/MembersHome";
-import Contact from "./pages/Contact";
 
 const App = () => {
   return (
@@ -13,7 +12,6 @@ const App = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/members" component={MembersHome} />
-        <Route exact path="/contact" component={Contact} />
       </Switch>
     </BrowserRouter>
   );
