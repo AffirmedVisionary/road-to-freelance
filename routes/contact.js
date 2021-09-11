@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
       from: req.body.email, // sender address
       replyTo: req.body.email,
       to: process.env.NODEMAILER_RECIEVER, // list of receivers
-      subject: 'Node Contact Request', // Subject line
+      subject: `Message from ${req.body.name}`, // Subject line
       text: req.body.content, // plain text body
       html: output // html body
   };
@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
       }
       console.log('Message sent: %s', info.messageId);
 
-      res.render('contact', {msg:'Email has been sent'});
+      return res.status(201).json({ message: "Email Sent successfully" });
   });
 })
 

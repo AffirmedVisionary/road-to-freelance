@@ -28,9 +28,9 @@ const Contact = (props) => {
           },
         }
       );
-      props.history.push("/thank-you");
+      props.history.push("/thank-you", {name});
     } catch (err) {
-      setData({ ...data, error: err.response.data.error });
+      setData({ ...data, error: err });
     }
   };
 
