@@ -3,32 +3,37 @@ import axios from "axios";
 
 const Contact = (props) => {
   const [data, setData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     content: "",
+    newsletter: false,
     error: null,
   });
 
-  const { name, email, content, error } = data;
+  const { firstName, lastName, email, content, newsletter, error } = data;
+
+  console.log(newsletter)
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     try {
       setData({ ...data, error: null });
       await axios.post(
         "/api/send",
-        { name, email, content },
+        { firstName, lastName, email, content, newsletter },
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      props.history.push("/thank-you", {name});
+      props.history.push("/thank-you", {firstName, newsletter});
     } catch (err) {
       setData({ ...data, error: err });
     }
@@ -43,12 +48,22 @@ const Contact = (props) => {
         <div className="card p-5 shadow">
           <form>
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="firstName">First Name</label>
               <input
                 className="form-control"
                 type="text"
-                name="name"
-                value={name}
+                name="firstName"
+                value={firstName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                className="form-control"
+                type="text"
+                name="lastName"
+                value={lastName}
                 onChange={handleChange}
               />
             </div>
@@ -72,6 +87,17 @@ const Contact = (props) => {
                 value={content}
                 onChange={handleChange}
               />
+            </div>
+            <div className="checkbox">
+            <input type="hidden" name="newsletter" value="false" />
+              <input
+                style={{marginRight: "1rem"}}
+                type="checkbox"
+                name="newsletter"
+                value="true"
+                onChange={handleChange}
+              />
+              <label htmlFor="newsletter">Join the Newsletter?</label>
             </div>
             {error ? <p className="text-danger">{error}</p> : null}
             <div className="text-center">
