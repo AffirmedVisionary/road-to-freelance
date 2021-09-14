@@ -1,7 +1,8 @@
 const { check } = require("express-validator");
 
 exports.userRegisterValidator = [
-  check("name").not().isEmpty().withMessage("Name is required"),
+  check("firstName").not().isEmpty().withMessage("First Name is required"),
+  check("lastName").not().isEmpty().withMessage("Last Name is required"),
   check("email").isEmail().withMessage("Must be a valid mail address"),
   check("password")
     .isLength({ min: 6 })

@@ -3,13 +3,15 @@ import axios from "axios";
 
 const Register = (props) => {
   const [data, setData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
+    newsletter: false,
     error: null,
   });
 
-  const { name, email, password, error } = data;
+  const { firstName, lastName, email, password, newsletter, error } = data;
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -21,7 +23,7 @@ const Register = (props) => {
       setData({ ...data, error: null });
       await axios.post(
         "/api/auth/register",
-        { name, email, password },
+        { firstName, lastName, email, password, newsletter },
         {
           headers: {
             "Content-Type": "application/json",
@@ -43,12 +45,22 @@ const Register = (props) => {
         <div className="card p-5 shadow">
           <form>
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="firstName">First Name</label>
               <input
                 className="form-control"
                 type="name"
-                name="name"
-                value={name}
+                name="firstName"
+                value={firstName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                className="form-control"
+                type="name"
+                name="lastName"
+                value={lastName}
                 onChange={handleChange}
               />
             </div>
@@ -72,6 +84,17 @@ const Register = (props) => {
                 onChange={handleChange}
               />
             </div>
+            <div className="checkbox">
+            <input type="hidden" name="newsletter" value="false" />
+              <input
+                style={{marginRight: "1rem"}}
+                type="checkbox"
+                name="newsletter"
+                value="true"
+                onChange={handleChange}
+              />
+              <label htmlFor="newsletter">Join the Newsletter?</label>
+              </div>
             {error ? <p className="text-danger">{error}</p> : null}
             <div className="text-center">
               <button className="btn btn-primary" onClick={handleSubmit}>
