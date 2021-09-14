@@ -40,4 +40,3 @@ NODEMAILER_PORT (465 is the secure one)
 NODEMAILER_AUTH_USER (email address connected to above domain name)
 NODEMAILER_AUTH_PASS (password for the user)
 NODEMAILER_RECIEVER (where you want the emails to end up)
-
