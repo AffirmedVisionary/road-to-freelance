@@ -1,38 +1,41 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Register = (props) => {
+const Contact = (props) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
+    content: "",
     newsletter: false,
     error: null,
   });
 
-  const { firstName, lastName, email, password, newsletter, error } = data;
+  const { firstName, lastName, email, content, newsletter, error } = data;
+
+  console.log(newsletter)
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     try {
       setData({ ...data, error: null });
       await axios.post(
-        "/api/auth/register",
-        { firstName, lastName, email, password, newsletter },
+        "/api/send",
+        { firstName, lastName, email, content, newsletter },
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      props.history.push("/login");
+      props.history.push("/thank-you", {firstName, newsletter});
     } catch (err) {
-      setData({ ...data, error: err.response.data.error });
+      setData({ ...data, error: err });
     }
   };
 
@@ -40,7 +43,7 @@ const Register = (props) => {
     <div className="row">
       <div className="col-sm-2" />
       <div className="col-sm-8">
-        <h4 className="text-muted text-center mb-5">Create an account</h4>
+        <h4 className="text-muted text-center mb-5">Send Us a Message</h4>
 
         <div className="card p-5 shadow">
           <form>
@@ -48,7 +51,7 @@ const Register = (props) => {
               <label htmlFor="firstName">First Name</label>
               <input
                 className="form-control"
-                type="name"
+                type="text"
                 name="firstName"
                 value={firstName}
                 onChange={handleChange}
@@ -58,7 +61,7 @@ const Register = (props) => {
               <label htmlFor="lastName">Last Name</label>
               <input
                 className="form-control"
-                type="name"
+                type="text"
                 name="lastName"
                 value={lastName}
                 onChange={handleChange}
@@ -68,19 +71,20 @@ const Register = (props) => {
               <label htmlFor="email">Email</label>
               <input
                 className="form-control"
-                type="email"
+                type="text"
                 name="email"
                 value={email}
                 onChange={handleChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
+              <label htmlFor="content">Message</label>
+              <textarea
+                rows="4"
                 className="form-control"
-                type="password"
-                name="password"
-                value={password}
+                type="text"
+                name="content"
+                value={content}
                 onChange={handleChange}
               />
             </div>
@@ -94,11 +98,11 @@ const Register = (props) => {
                 onChange={handleChange}
               />
               <label htmlFor="newsletter">Join the Newsletter?</label>
-              </div>
+            </div>
             {error ? <p className="text-danger">{error}</p> : null}
             <div className="text-center">
               <button className="btn btn-primary" onClick={handleSubmit}>
-                Register
+                Send
               </button>
             </div>
           </form>
@@ -107,6 +111,5 @@ const Register = (props) => {
       <div className="col-sm-2" />
     </div>
   );
-};
-
-export default Register;
+}
+export default Contact;

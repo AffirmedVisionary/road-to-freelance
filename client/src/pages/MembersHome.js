@@ -4,6 +4,7 @@ import axios from "axios";
 const MembersHome = (props) => {
   const [user, setUser] = useState(null);
 
+
   const getUser = async () => {
     const res = await axios.get("/api/auth", {
       headers: {
@@ -11,7 +12,9 @@ const MembersHome = (props) => {
       },
     });
     setUser(res.data);
+    console.log(res.data)
   };
+
   useEffect(() => {
     getUser();
   }, []);
@@ -27,7 +30,7 @@ const MembersHome = (props) => {
   return (
     <div className="m-5">
       <div className="jumbotron">
-        <p className="lead">Welcome {user && user.name}</p>
+        <p className="lead">Welcome {user && user.firstName}</p>
         <button className="btn btn-danger" onClick={logout}>
           Logout
         </button>
