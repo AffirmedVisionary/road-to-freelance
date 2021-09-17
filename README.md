@@ -1,3 +1,12 @@
+![JavaScript Language](https://img.shields.io/badge/language-JavaScript-F7DF1E.svg?logo=JavaScript&color=%23ffcc66&style=for-the-badge)
+![NodeJS Platform](https://img.shields.io/badge/platform-NodeJS-339933.svg?logo=Node.js&color=%23ffcc66&style=for-the-badge)
+
+![Lines of code](https://img.shields.io/tokei/lines/github/affirmedvisionary/road-to-freelance?color=%23ffcc66&style=for-the-badge)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/affirmedvisionary/road-to-freelance?color=%23ffcc66&style=for-the-badge)
+
+![GitHub followers](https://img.shields.io/github/followers/affirmedvisionary?color=%23ffcc66&style=for-the-badge)
+![Twitter Follow](https://img.shields.io/twitter/follow/affirmedvision?color=%23ffcc66&style=for-the-badge)
+
 # Road To Freelance
 
 A companion repository to my third #100DaysOfCode challenge
