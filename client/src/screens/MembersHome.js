@@ -39,13 +39,11 @@ const MembersHome = ({ location, history }) => {
     if (!userInfo) {
       history.push("/login")
     } else {
-      if (!user || !user.name || success) {
+      if (!user || !user.firstName || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails("profile"))
       } else {
-        setData.firstName(user.firstName)
-        setData.lastName(user.lastName)
-        setData.email(user.email)
+        setData({ ...data, firstName: user.firstName, lastName: user.lastName, email: user.email })
       }
     }
   }, [dispatch, history, userInfo, user, success])
@@ -69,7 +67,7 @@ const MembersHome = ({ location, history }) => {
   return (
     <div className="m-5">
       <div className="jumbotron">
-        <p className="lead">Welcome {user && user.name}</p>
+        <p className="lead">Welcome {user && user.firstName}</p>
         <button className="btn btn-danger" onClick={logout}>
           Logout
         </button>

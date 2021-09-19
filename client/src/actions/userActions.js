@@ -121,7 +121,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(
-      "/api/user",
+      "/api/user/profile",
       config
     )
 
@@ -158,7 +158,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      `https://tranquil-citadel-65347.herokuapp.com/api/users/profile`,
+      "/api/user/profile",
       user,
       config
     )
