@@ -1,38 +1,44 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux"
+import Loader from "../components/loader";
+import { register } from "../actions/userActions";
 
-const Register = (props) => {
+const Register = ({ location, history }) => {
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
-    error: null,
   });
 
-  const { name, email, password, error } = data;
+  const { name, email, password } = data;
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setData({ ...data, error: null });
-      await axios.post(
-        "/api/auth/register",
-        { name, email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      props.history.push("/login");
-    } catch (err) {
-      setData({ ...data, error: err.response.data.error });
+  const dispatch = useDispatch()
+
+  const userRegister = useSelector((state) => state.userRegister)
+  const { loading, error, userInfo } = userRegister
+
+  const redirect = location.search ? location.search.split("=")[1] : "/"
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect)
     }
-  };
+  }, [history, userInfo, redirect])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match")
+    } else {
+      dispatch(register(name, email, password))
+      // DISPATCH REGISTER
+    }
+  }
 
   return (
     <div className="row">
@@ -42,6 +48,7 @@ const Register = (props) => {
 
         <div className="card p-5 shadow">
           <form>
+          {loading && <Loader />}
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input

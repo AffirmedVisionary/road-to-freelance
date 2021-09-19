@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
-import Register from "./pages/auth/Register";
-import Login from "./pages/auth/Login";
-import MembersHome from "./pages/MembersHome";
+import Register from "./screens/Register";
+import Login from "./screens/Login";
+import MembersHome from "./screens/MembersHome";
 
 const App = () => {
   return (

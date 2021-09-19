@@ -1,38 +1,38 @@
-import axios from 'axios'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
+import Loader from "../components/Loader"
+import { login } from "../actions/userActions"
 
-const Login = (props) => {
+const Login = ({location, history}) => {
   const [data, setData] = useState({
     email: '',
     password: '',
-    error: null
   })
 
-  const { email, password, error } = data
+  const { email, password } = data
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      setData({ ...data, error: null })
-      const res = await axios.post(
-        '/api/auth/login',
-        { email, password },
-        {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      localStorage.setItem('token', res.data.token)
-      props.history.push('/members')
-    } catch (err) {
-      setData({ ...data, error: err.response.data.error })
+  const dispatch = useDispatch()
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+
+  const redirect = location.search ? location.search.split("=")[1] : "/"
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect)
     }
+  }, [history, userInfo, redirect])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(login(email, password))
+    // DISPATCH LOGIN
   }
 
   return (
@@ -42,6 +42,7 @@ const Login = (props) => {
         <h4 className='text-muted text-center mb-5'>Log into your account</h4>
         <div className='card p-5 shadow'>
           <form>
+          {loading && <Loader />}
             <div className='form-group'>
               <label htmlFor='email'>Email</label>
               <input
