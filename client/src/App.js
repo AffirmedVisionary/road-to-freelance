@@ -4,8 +4,8 @@ import "./App.css";
 import Register from "./screens/Register";
 import Login from "./screens/Login";
 import MembersHome from "./screens/MembersHome";
-import Contact from "./pages/Contact";
-import ThankYou from "./pages/ThankYou";
+import Contact from "./screens/Contact";
+import ThankYou from "./screens/ThankYou";
 
 const App = () => {
   return (

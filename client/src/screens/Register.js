@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import Loader from "../components/loader";
+import Loader from "../components/Loader";
+import Message from "../components/Message"
 import { register } from "../actions/userActions";
 
 const Register = ({ location, history }) => {
@@ -9,11 +10,13 @@ const Register = ({ location, history }) => {
     lastName: "",
     email: "",
     password: "",
+    confirmPassword: "",
     newsletter: false,
-    error: null,
   });
 
-  const { firstName, lastName, email, password, newsletter, error } = data;
+  const [message, setMessage ] = useState(null)
+
+  const { firstName, lastName, email, password, confirmPassword, newsletter } = data;
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -24,7 +27,7 @@ const Register = ({ location, history }) => {
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
 
-  const redirect = location.search ? location.search.split("=")[1] : "/"
+  const redirect = location.search ? location.search.split("=")[1] : "/members"
 
   useEffect(() => {
     if (userInfo) {
@@ -51,6 +54,7 @@ const Register = ({ location, history }) => {
 
       <div className="card p-5 shadow">
         <form>
+        {message && <Message variant='danger'>{message}</Message>}
         {loading && <Loader />}
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
@@ -89,6 +93,16 @@ const Register = ({ location, history }) => {
               type="password"
               name="password"
               value={password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Confirm Password</label>
+            <input
+              className="form-control"
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
               onChange={handleChange}
             />
           </div>

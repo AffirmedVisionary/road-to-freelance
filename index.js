@@ -1,15 +1,25 @@
 import express from "express"
 import dotenv from "dotenv"
-import connectDB from ".config/db.js"
+import mongoose from "mongoose"
 import cors from "cors"
 import path from "path"
 import colors from "colors"
-import userRoutes from "./routes/userRoutes"
+import userRoutes from "./routes/userRoutes.js"
+import contactRoute from "./routes/contact.js"
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js"
 
 dotenv.config()
 
 // Connect DB
-connectDB()
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("MongoDB is connected"))
+  .catch((err) => console.log(err));
 
 const app = express();
 
@@ -19,7 +29,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/user", userRoutes);
-app.use("/api/send", require("./routes/contact"));
+app.use("/api/send", contactRoute);
 
 // Serve static assets (build folder) if in production
 if (process.env.NODE_ENV === 'production') {
@@ -31,6 +41,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.use(notFound)
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000;

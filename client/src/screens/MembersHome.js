@@ -3,16 +3,19 @@ import { useDispatch, useSelector } from "react-redux"
 import { getUserDetails, updateUserProfile } from "../actions/userActions"
 import { USER_UPDATE_PROFILE_RESET} from '../constants/userConstants'
 import Loader from "../components/Loader"
+import Message from "../components/Message";
 
 const MembersHome = ({ location, history }) => {
   const [data, setData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
+    message: null,
   });
 
-  const { name, email, password, confirmPassword } = data;
+  const { firstName, lastName, email, password, confirmPassword, message } = data;
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -40,19 +43,20 @@ const MembersHome = ({ location, history }) => {
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails("profile"))
       } else {
-        setName(user.name)
-        setEmail(user.email)
+        setData.firstName(user.firstName)
+        setData.lastName(user.lastName)
+        setData.email(user.email)
       }
     }
   }, [dispatch, history, userInfo, user, success])
 
-  const handleChange = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
-      setMessage("Passwords do not match")
+      setData.message("Passwords do not match")
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }))
+      dispatch(updateUserProfile({ id: user._id, firstName, lastName, email, password }))
       // DISPATCH UPDATE USER
     }
   }
@@ -70,19 +74,29 @@ const MembersHome = ({ location, history }) => {
           Logout
         </button>
         <h2>User Profile</h2>
-        {/* {message && <Message variant='danger'>{message}</Message>}
+        {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>Profile Updated</Message>} */}
+        {success && <Message variant='success'>Profile Updated</Message>}
         {loading && <Loader />}
         <form>
           {loading && <Loader />}
             <div className="form-group">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="firstName">First Name</label>
               <input
                 className="form-control"
                 type="name"
-                name="name"
-                value={name}
+                name="firstName"
+                value={firstName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                className="form-control"
+                type="name"
+                name="lastName"
+                value={lastName}
                 onChange={handleChange}
               />
             </div>
@@ -116,7 +130,7 @@ const MembersHome = ({ location, history }) => {
                 onChange={handleChange}
               />
             </div>
-            <button className="btn btn-primary" onClick={handleSubmit}>
+            <button className="btn btn-primary" onClick={submitHandler}>
                 Update
               </button>
             {error ? <p className="text-danger">{error}</p> : null}
