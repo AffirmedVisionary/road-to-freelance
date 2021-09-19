@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getUserDetails, updateUserProfile } from "../actions/userActions"
+import { getUserDetails, updateUserProfile, logout } from "../actions/userActions"
 import { USER_UPDATE_PROFILE_RESET} from '../constants/userConstants'
 import Loader from "../components/Loader"
 import Message from "../components/Message";
@@ -46,7 +46,7 @@ const MembersHome = ({ location, history }) => {
         setData({ ...data, firstName: user.firstName, lastName: user.lastName, email: user.email })
       }
     }
-  }, [dispatch, history, userInfo, user, success])
+  }, [dispatch, history, userInfo, user, success, data])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -59,16 +59,15 @@ const MembersHome = ({ location, history }) => {
     }
   }
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    history.push("/login");
+  const logoutHandler = () => {
+    dispatch(logout())
   };
 
   return (
     <div className="m-5">
       <div className="jumbotron">
         <p className="lead">Welcome {user && user.firstName}</p>
-        <button className="btn btn-danger" onClick={logout}>
+        <button className="btn btn-danger" onClick={logoutHandler}>
           Logout
         </button>
         <h2>User Profile</h2>
