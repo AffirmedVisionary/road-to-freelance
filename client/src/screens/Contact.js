@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Contact = (history) => {
+const Contact = (props) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -33,7 +33,7 @@ const Contact = (history) => {
           },
         }
       );
-      history.push("/thank-you", {firstName, newsletter});
+      props.history.push("/thank-you", {firstName, newsletter});
     } catch (err) {
       setData({ ...data, error: err });
     }
