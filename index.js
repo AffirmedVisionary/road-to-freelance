@@ -1,9 +1,14 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-require("dotenv").config();
-const cors = require("cors");
-const path = require('path')
+import express from "express"
+import dotenv from "dotenv"
+import mongoose from "mongoose"
+import cors from "cors"
+import path from "path"
+import colors from "colors"
+import userRoutes from "./routes/userRoutes.js"
+import contactRoute from "./routes/contact.js"
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js"
+
+dotenv.config()
 
 // Connect DB
 mongoose
@@ -16,13 +21,15 @@ mongoose
   .then(() => console.log("MongoDB is connected"))
   .catch((err) => console.log(err));
 
+const app = express();
+
 app.use(cors());
 // Body parser
 app.use(express.json());
 
 // Routes
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/send", require("./routes/contact"));
+app.use("/api/user", userRoutes);
+app.use("/api/send", contactRoute);
 
 // Serve static assets (build folder) if in production
 if (process.env.NODE_ENV === 'production') {
@@ -34,9 +41,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+app.use(notFound)
+app.use(errorHandler)
+
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server Running in ${process.env.NODE_DEV} mode on port ${PORT}`.yellow.bold));
 // prod false bcz  it will not run build script if its in prod, once its done it will be in prod
 
 // login heroku , create new app
