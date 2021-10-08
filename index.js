@@ -5,6 +5,7 @@ import cors from "cors"
 import path from "path"
 import colors from "colors"
 import userRoutes from "./routes/userRoutes.js"
+import adminRoutes from "./routes/adminRoutes.js"
 import contactRoute from "./routes/contact.js"
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js"
 
@@ -29,6 +30,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/user", userRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/send", contactRoute);
 
 // Serve static assets (build folder) if in production
