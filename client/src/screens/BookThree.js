@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import TableOfContents from '../components/myBook/TableOfContents'
 import { pages } from '../components/myBook/pages'
-import PageComponent from '../components/myBook/PageComp'
+import PageComponent from '../components/myBook/Page'
 import BackPage from '../components/myBook/BackPage'
 import FrontPage from '../components/myBook/FrontPage'
 

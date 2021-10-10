@@ -2,7 +2,7 @@ import React, {useRef, useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import FlipPage from "react-flip-page";
 import FrontPage from '../components/myBook/FrontPage';
-import PageComp from '../components/myBook/PageComp';
+import PageComp from '../components/myBook/Page';
 import {pages} from '../components/myBook/pages';
 import BackPage from '../components/myBook/BackPage';
 import TableOfContents from '../components/myBook/TableOfContents';
