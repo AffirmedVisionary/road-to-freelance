@@ -1,13 +1,13 @@
 import FlipPage from 'react-flip-page'
 import React, { useRef, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import TableOfContents from '../components/myBook/TableOfContents'
-import { pages } from '../components/myBook/pages'
-import PageComponent from '../components/myBook/Page'
-import BackPage from '../components/myBook/BackPage'
-import FrontPage from '../components/myBook/FrontPage'
+import TableOfContents from './TableOfContents'
+import { pages } from './pages'
+import PageComponent from './Page'
+import BackPage from './BackPage'
+import FrontPage from './FrontPage'
 
-const BookThree = () => {
+const MyBook = () => {
   const [currentPageState, setCurrentPageState] = useState()
 
   const flipPage = useRef()
@@ -54,8 +54,8 @@ const BookThree = () => {
                 width: '100%'
               }}
             >
-              <Button onClick={handlePrevClick}>Back</Button>
-              <Button onClick={handleNextClick}>Next</Button>
+              <Button variant='outline-secondary' onClick={handlePrevClick}>Back</Button>
+              <Button variant='outline-secondary' onClick={handleNextClick}>Next</Button>
             </div>
           </Row>
         </Col>
@@ -64,4 +64,4 @@ const BookThree = () => {
   )
 }
 
-export default BookThree
+export default MyBook

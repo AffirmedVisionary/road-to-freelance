@@ -7,10 +7,10 @@ const FrontPage = () => {
             <Col className='spine front-left' />
             <Col className='spine container'>
                 <Row>
-                    <h1 className='auto'>BOOK TITLE</h1>
+                    <h1 className='auto'>Visionary Journal</h1>
                 </Row>
                 <Row className='py-3'>
-                    <h5 className='auto'>Author</h5>
+                    <h5 className='auto'>Affirmed Visionary</h5>
                 </Row>
             </Col>
         </Row>
