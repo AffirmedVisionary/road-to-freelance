@@ -1,9 +1,122 @@
-body {
-    background-color: linen;
-    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+#book-body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: sans-serif;
+    background-color: powderblue;
+}
+
+/* Book */
+
+.book {
+    position: relative;
+    width: 350px;
+    height: 500px;
+    transition: transform 0.5s;
+}
+
+/* Controller Buttons */
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.5s;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover i {
+    color: #636363;
+}
+
+/* Paper stack order */
+#p1 {
+    z-index: 3;
+}
+
+#p2 {
+    z-index: 2;
+}
+
+#p3 {
+    z-index: 1;
+}
+#months {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.month {
+    width: fit-content;
+}
+
+/* #next-btn {
+    justify-items: flex-end;
+} */
+
+/* end of book styling */
 
 .form {
     max-width: 600px;
-    margin: auto;    
+    margin: auto;
 }
+
+
+/* #navigation {
+    width: 100%;
+} */
+/* Third Book */
+.auto{
+    margin: auto;
+  }
+
+  .h-90 {
+    height: 85vh;
+    min-width: 98vw;
+  }
+
+  .book3 {
+    border: 1px solid #eee;
+  }
+
+  .spine {
+    border-right: 5px solid black;
+    padding: 40px 40px 20px 60px;
+  }
+
+  .front-left {
+    background-color: white;
+  }
+
+  .back-right {
+    background-color: white;
+  }
+
+  .left {
+    background-color: #e09087;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+  }
+
+  .toc {
+    font-weight: bold;
+    cursor: pointer;
+  }
