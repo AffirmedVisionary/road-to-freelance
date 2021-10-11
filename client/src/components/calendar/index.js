@@ -45,9 +45,9 @@ const CalendarComponent = () => {
   console.log(data)
   return (
     <>
-      <div>Hey its madness</div>
-      <div>{JSON.stringify(data)}</div>
-      <div className={'bg-white box-border m-8 flex'}>
+      {/* <div>Hey its madness</div>
+      <div>{JSON.stringify(data)}</div> */}
+      <div className={'bg-white box-border m-8 flex w-max'}>
         <div className={'border rounded-md m-8 p-2'}>
         <h1 className={"flex w-full items-center justify-center font-bold text-4xl mb-2"}>{format(selectedDate, "MMMM")} {format(selectedDate, "yyyy")}</h1>
           <WeekNames />
